@@ -1,0 +1,18 @@
+[
+  {
+    "bus_number": "1117",
+    "schedule": { "weekday": ["04:40", "05:00"], "weekend": ["04:40", "05:00"] }
+  },
+  {
+    "bus_number": "1150",
+    "schedule": { "weekday": ["05:00", "05:20"], "weekend": ["05:00", "05:20"] }
+  },
+  {
+    "bus_number": "1303",
+    "schedule": { "weekday": ["05:00", "05:15"], "weekend": ["05:00", "05:30"] }
+  },
+  {
+    "bus_number": "1005",
+    "schedule": { "weekday": ["05:00", "05:30"], "weekend": ["05:00", "05:40"] }
+  }
+]
