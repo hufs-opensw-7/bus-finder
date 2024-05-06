@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="lg:container lg:mx-auto">
+      <div className="navbar bg-primary text-primary-content">
+      <button className="btn btn-ghost text-xl">모버파</button>
+    </div>
+
+      <div className="card card-side bg-base-100 shadow-xl">
+        <figure><img src="/" alt=""/></figure>
+        <div className="card-body">
+          <h2 className="card-title">1117</h2>
+          <p>설명</p>
+        </div>
+      </div>
+      <div className="card card-side bg-base-100 shadow-xl">
+        <figure><img src="/" alt=""/></figure>
+        <div className="card-body">
+          <h2 className="card-title">1150</h2>
+          <p>설명</p>
+        </div>
+      </div>
     </div>
   );
 }
