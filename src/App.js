@@ -1,6 +1,7 @@
 import Header from './components/Header';
 import BusCard from './components/BusCard';
 import GameCard from './components/GameCard';
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
       </div>
 
       <BusCard />
+      <div className="divider mt-8"></div>
       <GameCard />
+      <Footer />
     </div>
   );
 }
