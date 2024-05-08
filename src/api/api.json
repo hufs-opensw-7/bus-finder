@@ -1,6 +1,7 @@
 [
   {
     "bus_number": "1117",
+    "heading_to": "강변역",
     "schedule": {
       "weekday": [
         "04:40",
@@ -80,6 +81,7 @@
   },
   {
     "bus_number": "1150",
+    "heading_to": "서울역 환승센터(남대문)",
     "schedule": {
       "weekday": [
         "05:00",
@@ -187,6 +189,7 @@
   },
   {
     "bus_number": "1303",
+    "heading_to": "안양",
     "schedule": {
       "weekday": [
         "05:00",
@@ -252,6 +255,7 @@
   },
   {
     "bus_number": "1005",
+    "heading_to": "강남역(양재역)",
     "schedule": {
       "weekday": [
         "05:00",
