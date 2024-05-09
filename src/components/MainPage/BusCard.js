@@ -1,5 +1,5 @@
-import api from '../api/api.json'
-import redBusImage from '../assets/red_bus.png';
+import api from '../../api/api.json'
+import redBusImage from '../../assets/red_bus.png';
 
 function BusCard() {
     const card = api.map((item, index) => {

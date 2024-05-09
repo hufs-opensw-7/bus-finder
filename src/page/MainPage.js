@@ -1,21 +1,15 @@
-import Header from '../components/Header';
-import ArrivingSoon from '../components/ArrivingSoonCard';
-import BusCard from '../components/BusCard';
-import GameCard from '../components/GameCard';
-import Footer from '../components/Footer'
+import ArrivingSoon from '../components/MainPage/ArrivingSoonCard';
+import BusCard from '../components/MainPage/BusCard';
+import GameCard from '../components/MainPage/GameCard';
 
 function MainPage() {
   return (
-    <div className="lg:container lg:mx-auto">
-      <Header />
+    <>
       <ArrivingSoon />
       <BusCard />
-
       <div className="divider mt-8"></div>
-      
       <GameCard />
-      <Footer />
-    </div>
+    </>
   );
 }
 

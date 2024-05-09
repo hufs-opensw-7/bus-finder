@@ -1,4 +1,4 @@
-import playingGame from '../assets/playing_game.png'
+import playingGame from '../../assets/playing_game.png'
 
 function GameCard() {
     return (
