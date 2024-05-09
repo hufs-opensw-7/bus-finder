@@ -81,7 +81,7 @@
   },
   {
     "bus_number": "1150",
-    "heading_to": "서울역 환승센터(남대문)",
+    "heading_to": "서울역",
     "schedule": {
       "weekday": [
         "05:00",
@@ -255,7 +255,7 @@
   },
   {
     "bus_number": "1005",
-    "heading_to": "강남역(양재역)",
+    "heading_to": "강남역",
     "schedule": {
       "weekday": [
         "05:00",

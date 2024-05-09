@@ -5,7 +5,7 @@ function BusCard() {
     const card = api.map((item, index) => {
         return (
             <div key={index} className="card card-side bg-base-100 shadow-xl my-4">
-                <figure className="w-28 ml-5">
+                <figure className="max-w-24 ml-4">
                     <img src={redBusImage} alt="bus image"/>
                 </figure>
 
