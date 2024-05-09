@@ -1,16 +1,18 @@
+import { BrowserRouter } from 'react-router-dom';
+import Container from './Container';
+
 import Header from './components/Header';
 import Footer from './components/Footer'
 
-import MainPage from "./page/MainPage";
-import DetailPage from './page/DetailPage';
-
 function App() {
   return (
-    <div className="lg:container lg:mx-auto">
-      <Header />
-      <DetailPage />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="lg:container lg:mx-auto">
+        <Header />
+        <Container />
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
