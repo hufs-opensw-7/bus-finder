@@ -5,7 +5,7 @@ import redBusImage from "../../assets/red_bus.png";
 function BusCard() {
   const card = api.map((item, index) => {
     return (
-      //<Link to="/detail">
+      // <Link to="/detail">
       <Link to={`/detail/${item.bus_number}`} key={index}>
         <div
           key={index}

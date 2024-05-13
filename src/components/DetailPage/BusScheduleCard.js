@@ -1,4 +1,4 @@
-function BusScheduleCard() {
+function BusScheduleCard({ busSchedule }) {
     return (
         <div className="card bg-neutral my-4">
             <div className="overflow-x-auto">
@@ -10,18 +10,12 @@ function BusScheduleCard() {
                         </tr>
                     </thead>
                     <tbody className="text-center">
-                        <tr className="bg-base-200">
-                            <td>4:40</td>
-                            <td>4:40</td>
+                    {busSchedule.weekday.map((weekdayTime, index) => (
+                        <tr key={index}>
+                            <td>{weekdayTime}</td>
+                            <td>{index < busSchedule.weekend.length ? busSchedule.weekend[index] : ''}</td>
                         </tr>
-                        <tr>
-                            <td>5:00</td>
-                            <td>5:00</td>
-                        </tr>
-                        <tr>
-                            <td>5:20</td>
-                            <td>5:20</td>
-                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>

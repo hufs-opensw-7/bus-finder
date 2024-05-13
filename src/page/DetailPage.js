@@ -19,7 +19,7 @@ function DetailPage() {
           headingTo={busInfo.heading_to}
         />
       )}
-      <BusScheduleCard />
+      {busInfo && (<BusScheduleCard busSchedule={busInfo.schedule} />)}
     </>
   );
 }
