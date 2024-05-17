@@ -7,14 +7,14 @@ function BusScheduleCard({ busSchedule }) {
 
   const currentHours = currentTime.getHours();
   const currentMinutes = currentTime.getMinutes();
+  const currentTotalMinutes = currentHours * 60 + currentMinutes;
 
-  const closestTime = schedule.reduce((prev, curr) => {
-    const [prevHours, prevMinutes] = prev.split(":").map(Number);
-    const [currHours, currMinutes] = curr.split(":").map(Number);
-    const prevDiff = Math.abs(prevHours * 60 + prevMinutes - (currentHours * 60 + currentMinutes));
-    const currDiff = Math.abs(currHours * 60 + currMinutes - (currentHours * 60 + currentMinutes));
-    return currDiff < prevDiff ? curr : prev;
-  });
+  // Find the next upcoming time
+  const nextTime = schedule.find(time => {
+    const [hours, minutes] = time.split(":").map(Number);
+    const totalMinutes = hours * 60 + minutes;
+    return totalMinutes > currentTotalMinutes;
+  }) || schedule[0]; // If no future times, fall back to the first time of the day
 
   return (
     <div className="card bg-neutral my-4">
@@ -29,10 +29,10 @@ function BusScheduleCard({ busSchedule }) {
           <tbody className="text-center">
             {busSchedule.weekday.map((weekdayTime, index) => (
               <tr key={index}>
-                <td className={!isWeekend && weekdayTime === closestTime ? "bg-base-200" : ""}>
+                <td className={!isWeekend && weekdayTime === nextTime ? "bg-base-200" : ""}>
                   {weekdayTime}
                 </td>
-                <td className={isWeekend && index < busSchedule.weekend.length && busSchedule.weekend[index] === closestTime ? "bg-base-200" : ""}>
+                <td className={isWeekend && index < busSchedule.weekend.length && busSchedule.weekend[index] === nextTime ? "bg-base-200" : ""}>
                   {index < busSchedule.weekend.length ? busSchedule.weekend[index] : ""}
                 </td>
               </tr>
