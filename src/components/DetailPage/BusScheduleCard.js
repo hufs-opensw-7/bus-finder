@@ -1,14 +1,19 @@
+import React from "react";
+
 function BusScheduleCard({ busSchedule }) {
   const currentTime = new Date();
+  const isWeekend = currentTime.getDay() === 0 || currentTime.getDay() === 6; // 0 for Sunday, 6 for Saturday
+  const schedule = isWeekend ? busSchedule.weekend : busSchedule.weekday;
 
-  const closestTime = busSchedule.weekday.reduce((prev, curr) => {
-    const [hourPrev, minutePrev] = prev.split(":").map(Number);
-    const [hourCurr, minuteCurr] = curr.split(":").map(Number);
-    const timePrev = new Date(0, 0, 0, hourPrev, minutePrev);
-    const timeCurr = new Date(0, 0, 0, hourCurr, minuteCurr);
-    const diffPrev = Math.abs(currentTime - timePrev);
-    const diffCurr = Math.abs(currentTime - timeCurr);
-    return diffPrev < diffCurr ? prev : curr;
+  const currentHours = currentTime.getHours();
+  const currentMinutes = currentTime.getMinutes();
+
+  const closestTime = schedule.reduce((prev, curr) => {
+    const [prevHours, prevMinutes] = prev.split(":").map(Number);
+    const [currHours, currMinutes] = curr.split(":").map(Number);
+    const prevDiff = Math.abs(prevHours * 60 + prevMinutes - (currentHours * 60 + currentMinutes));
+    const currDiff = Math.abs(currHours * 60 + currMinutes - (currentHours * 60 + currentMinutes));
+    return currDiff < prevDiff ? curr : prev;
   });
 
   return (
@@ -23,9 +28,13 @@ function BusScheduleCard({ busSchedule }) {
           </thead>
           <tbody className="text-center">
             {busSchedule.weekday.map((weekdayTime, index) => (
-              <tr key={index} className={weekdayTime === closestTime ? "bg-base-200" : ""}>
-                <td>{weekdayTime}</td>
-                <td>{index < busSchedule.weekend.length ? busSchedule.weekend[index] : ""}</td>
+              <tr key={index}>
+                <td className={!isWeekend && weekdayTime === closestTime ? "bg-base-200" : ""}>
+                  {weekdayTime}
+                </td>
+                <td className={isWeekend && index < busSchedule.weekend.length && busSchedule.weekend[index] === closestTime ? "bg-base-200" : ""}>
+                  {index < busSchedule.weekend.length ? busSchedule.weekend[index] : ""}
+                </td>
               </tr>
             ))}
           </tbody>
