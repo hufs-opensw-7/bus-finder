@@ -69,10 +69,10 @@ function BusCard() {
             </div>
 
             <div className="content-center p-3 bg-neutral rounded-box text-green-400">
-              <span className="font-mono text-xl lg:text-3xl">
+              <span className={`font-mono ${timeToNextBuses[busNumber] === "곧 도착" ? "text-base lg:text-xl" : "text-xl lg:text-3xl"}`}>
                 <span>{timeToNextBuses[busNumber]}</span>
               </span>
-              <span className="text-sm lg:text-lg">{timeToNextBuses[busNumber] !== "곧 도착" ? "분" : ""}</span>
+              {timeToNextBuses[busNumber] !== "곧 도착" && <span className="text-sm lg:text-lg">분</span>}
             </div>
           </div>
         </Link>
