@@ -14,7 +14,7 @@ function BusScheduleCard({ busSchedule }) {
     const [hours, minutes] = time.split(":").map(Number);
     const totalMinutes = hours * 60 + minutes;
     return totalMinutes > currentTotalMinutes;
-  }) || schedule[0]; // If no future times, fall back to the first time of the day
+  }) || schedule[0];
 
   return (
     <div className="card bg-neutral my-4">

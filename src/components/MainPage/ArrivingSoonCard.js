@@ -2,6 +2,9 @@ import React from 'react';
 import api from "../../api/api.json";
 
 function ArrivingSoon() {
+    const currentDate = new Date();
+    const isWeekend = currentDate.getDay() === 0 || currentDate.getDay() === 6; // 0 for Sunday, 6 for Saturday
+
     // 현재 시간을 가져오는 함수
     const getCurrentTime = () => {
         const now = new Date();
@@ -17,7 +20,7 @@ function ArrivingSoon() {
     const getClosestBuses = () => {
         const closestBuses = [];
         api.forEach(bus => {
-            const schedules = bus.schedule.weekday; // 또는 주말에 따라 선택
+            const schedules = isWeekend ? bus.schedule.weekend : bus.schedule.weekday;
             schedules.forEach(time => {
                 if (isClose(time, currentTime)) {
                     closestBuses.push(bus.bus_number);

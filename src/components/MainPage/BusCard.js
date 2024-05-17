@@ -6,17 +6,24 @@ import redBusImage from "../../assets/red_bus.png";
 function BusCard() {
   const [timeToNextBuses, setTimeToNextBuses] = useState({});
 
+  const isWeekend = () => {
+    const currentDate = new Date();
+    return currentDate.getDay() === 0 || currentDate.getDay() === 6;
+  };
+
   useEffect(() => {
     const findTimeToNextBuses = () => {
       const now = new Date();
       const nowTime = `${now.getHours() < 10 ? '0' : ''}${now.getHours()}:${now.getMinutes() < 10 ? '0' : ''}${now.getMinutes()}`;
-
+      const weekend = isWeekend();
       const nextBuses = {};
+
       api.forEach(item => {
-        const currentTimeIndex = item.schedule.weekday.findIndex(time => time >= nowTime);
+        const schedule = weekend ? item.schedule.weekend : item.schedule.weekday;
+        const currentTimeIndex = schedule.findIndex(time => time >= nowTime);
 
         if (currentTimeIndex !== -1) {
-          const nextBusTime = item.schedule.weekday[currentTimeIndex];
+          const nextBusTime = schedule[currentTimeIndex];
           const nextBusHour = parseInt(nextBusTime.split(":")[0]);
           const nextBusMinute = parseInt(nextBusTime.split(":")[1]);
           const nextBusDateTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), nextBusHour, nextBusMinute);
@@ -29,8 +36,7 @@ function BusCard() {
             nextBuses[item.bus_number] = timeToNextBusInMinutes;
           }
         } else {
-          // If there are no more buses today, show the time until the first bus tomorrow
-          const firstBusTomorrow = item.schedule.weekday[0];
+          const firstBusTomorrow = schedule[0];
           const firstBusHour = parseInt(firstBusTomorrow.split(":")[0]);
           const firstBusMinute = parseInt(firstBusTomorrow.split(":")[1]);
           const firstBusDateTime = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, firstBusHour, firstBusMinute);
@@ -48,8 +54,8 @@ function BusCard() {
       setTimeToNextBuses(nextBuses);
     };
 
-    const interval = setInterval(findTimeToNextBuses, 60000); // Update every minute
-    findTimeToNextBuses(); // Initial call
+    const interval = setInterval(findTimeToNextBuses, 60000);
+    findTimeToNextBuses();
 
     return () => clearInterval(interval);
   }, []);

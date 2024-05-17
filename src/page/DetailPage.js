@@ -6,20 +6,25 @@ import api from "../api/api.json";
 
 function DetailPage() {
   const { busNumber } = useParams();
-  const [busInfo, setBusInfo] = useState();
+  const [busInfo, setBusInfo] = useState(null);
+
   useEffect(() => {
     const bus = api.find((item) => item.bus_number === busNumber);
     setBusInfo(bus);
   }, [busNumber]);
+
   return (
     <>
       {busInfo && (
-        <BusInformationCard
-          busNumber={busInfo.bus_number}
-          headingTo={busInfo.heading_to}
-        />
+        <>
+          <BusInformationCard
+            busNumber={busInfo.bus_number}
+            headingTo={busInfo.heading_to}
+            schedule={busInfo.schedule}
+          />
+          <BusScheduleCard busSchedule={busInfo.schedule} />
+        </>
       )}
-      {busInfo && (<BusScheduleCard busSchedule={busInfo.schedule} />)}
     </>
   );
 }
