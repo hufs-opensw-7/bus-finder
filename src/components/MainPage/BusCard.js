@@ -22,7 +22,12 @@ function BusCard() {
           const nextBusDateTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), nextBusHour, nextBusMinute);
           const timeDifference = nextBusDateTime - now;
           const timeToNextBusInMinutes = Math.round(timeDifference / 60000); // Convert milliseconds to minutes
-          nextBuses[item.bus_number] = timeToNextBusInMinutes;
+
+          if (timeToNextBusInMinutes <= 2) {
+            nextBuses[item.bus_number] = "곧 도착";
+          } else {
+            nextBuses[item.bus_number] = timeToNextBusInMinutes;
+          }
         } else {
           // If there are no more buses today, show the time until the first bus tomorrow
           const firstBusTomorrow = item.schedule.weekday[0];
@@ -31,7 +36,12 @@ function BusCard() {
           const firstBusDateTime = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, firstBusHour, firstBusMinute);
           const timeDifference = firstBusDateTime - now;
           const timeToNextBusInMinutes = Math.round(timeDifference / 60000); // Convert milliseconds to minutes
-          nextBuses[item.bus_number] = timeToNextBusInMinutes;
+
+          if (timeToNextBusInMinutes <= 2) {
+            nextBuses[item.bus_number] = "곧 도착";
+          } else {
+            nextBuses[item.bus_number] = timeToNextBusInMinutes;
+          }
         }
       });
 
@@ -62,7 +72,7 @@ function BusCard() {
               <span className="font-mono text-xl lg:text-3xl">
                 <span>{timeToNextBuses[busNumber]}</span>
               </span>
-              <span className="text-sm lg:text-lg">분</span>
+              <span className="text-sm lg:text-lg">{timeToNextBuses[busNumber] !== "곧 도착" ? "분" : ""}</span>
             </div>
           </div>
         </Link>
