@@ -7,19 +7,27 @@ function BusInformationCard({ busNumber, headingTo, schedule }) {
   useEffect(() => {
     const calculateTimeToNextBus = () => {
       const now = new Date();
-      const nowTime = `${now.getHours() < 10 ? '0' : ''}${now.getHours()}:${now.getMinutes() < 10 ? '0' : ''}${now.getMinutes()}`;
+      const nowTime = `${now.getHours() < 10 ? "0" : ""}${now.getHours()}:${
+        now.getMinutes() < 10 ? "0" : ""
+      }${now.getMinutes()}`;
 
       const isWeekend = now.getDay() === 0 || now.getDay() === 6; // 0 = Sunday, 6 = Saturday
       const scheduleTimes = isWeekend ? schedule.weekend : schedule.weekday;
 
-      const nextBusTime = scheduleTimes.find(time => time >= nowTime);
+      const nextBusTime = scheduleTimes.find((time) => time >= nowTime);
 
       if (nextBusTime) {
         const nextBusHour = parseInt(nextBusTime.split(":")[0]);
         const nextBusMinute = parseInt(nextBusTime.split(":")[1]);
-        const nextBusDateTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), nextBusHour, nextBusMinute);
+        const nextBusDateTime = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate(),
+          nextBusHour,
+          nextBusMinute
+        );
         const timeDifference = nextBusDateTime - now;
-        const timeToNextBusInMinutes = Math.round(timeDifference / 60000); 
+        const timeToNextBusInMinutes = Math.round(timeDifference / 60000);
 
         if (timeToNextBusInMinutes <= 0) {
           setTimeToNextBus("잠시 후 도착 예정");

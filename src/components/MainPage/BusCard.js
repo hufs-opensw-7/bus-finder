@@ -14,19 +14,29 @@ function BusCard() {
   useEffect(() => {
     const findTimeToNextBuses = () => {
       const now = new Date();
-      const nowTime = `${now.getHours() < 10 ? '0' : ''}${now.getHours()}:${now.getMinutes() < 10 ? '0' : ''}${now.getMinutes()}`;
+      const nowTime = `${now.getHours() < 10 ? "0" : ""}${now.getHours()}:${
+        now.getMinutes() < 10 ? "0" : ""
+      }${now.getMinutes()}`;
       const weekend = isWeekend();
       const nextBuses = {};
 
-      api.forEach(item => {
-        const schedule = weekend ? item.schedule.weekend : item.schedule.weekday;
-        const currentTimeIndex = schedule.findIndex(time => time >= nowTime);
+      api.forEach((item) => {
+        const schedule = weekend
+          ? item.schedule.weekend
+          : item.schedule.weekday;
+        const currentTimeIndex = schedule.findIndex((time) => time >= nowTime);
 
         if (currentTimeIndex !== -1) {
           const nextBusTime = schedule[currentTimeIndex];
           const nextBusHour = parseInt(nextBusTime.split(":")[0]);
           const nextBusMinute = parseInt(nextBusTime.split(":")[1]);
-          const nextBusDateTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), nextBusHour, nextBusMinute);
+          const nextBusDateTime = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate(),
+            nextBusHour,
+            nextBusMinute
+          );
           const timeDifference = nextBusDateTime - now;
           const timeToNextBusInMinutes = Math.round(timeDifference / 60000); // Convert milliseconds to minutes
 
@@ -39,7 +49,13 @@ function BusCard() {
           const firstBusTomorrow = schedule[0];
           const firstBusHour = parseInt(firstBusTomorrow.split(":")[0]);
           const firstBusMinute = parseInt(firstBusTomorrow.split(":")[1]);
-          const firstBusDateTime = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, firstBusHour, firstBusMinute);
+          const firstBusDateTime = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate() + 1,
+            firstBusHour,
+            firstBusMinute
+          );
           const timeDifference = firstBusDateTime - now;
           const timeToNextBusInMinutes = Math.round(timeDifference / 60000); // Convert milliseconds to minutes
 
@@ -62,7 +78,7 @@ function BusCard() {
 
   return (
     <>
-      {Object.keys(timeToNextBuses).map(busNumber => (
+      {Object.keys(timeToNextBuses).map((busNumber) => (
         <Link to={`/detail/${busNumber}`} key={busNumber}>
           <div className="card card-side bg-base-100 shadow-xl my-4 hover:bg-base-200">
             <figure className="max-w-20 lg:max-w-24 ml-3.5 -mr-4">
@@ -71,14 +87,25 @@ function BusCard() {
 
             <div className="card-body">
               <h2 className="card-title text-base lg:text-lg">{busNumber}</h2>
-              <p className="text-sm lg:text-base">{api.find(item => item.bus_number === busNumber).heading_to} 방면</p>
+              <p className="text-sm lg:text-base">
+                {api.find((item) => item.bus_number === busNumber).heading_to}{" "}
+                방면
+              </p>
             </div>
 
             <div className="content-center p-3 bg-neutral rounded-box text-green-400">
-              <span className={`font-mono ${timeToNextBuses[busNumber] === "곧 도착" ? "text-base lg:text-xl" : "text-xl lg:text-3xl"}`}>
+              <span
+                className={`font-mono ${
+                  timeToNextBuses[busNumber] === "곧 도착"
+                    ? "text-base lg:text-xl"
+                    : "text-xl lg:text-3xl"
+                }`}
+              >
                 <span>{timeToNextBuses[busNumber]}</span>
               </span>
-              {timeToNextBuses[busNumber] !== "곧 도착" && <span className="text-sm lg:text-lg">분</span>}
+              {timeToNextBuses[busNumber] !== "곧 도착" && (
+                <span className="text-sm lg:text-lg">분</span>
+              )}
             </div>
           </div>
         </Link>
