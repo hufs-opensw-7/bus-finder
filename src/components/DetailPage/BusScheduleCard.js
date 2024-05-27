@@ -9,12 +9,13 @@ function BusScheduleCard({ busSchedule }) {
   const currentMinutes = currentTime.getMinutes();
   const currentTotalMinutes = currentHours * 60 + currentMinutes;
 
-  // Find the next upcoming time
   const nextTime = schedule.find(time => {
     const [hours, minutes] = time.split(":").map(Number);
     const totalMinutes = hours * 60 + minutes;
     return totalMinutes > currentTotalMinutes;
   }) || schedule[0];
+
+  const hasWeekendSchedule = busSchedule.weekend && busSchedule.weekend.length > 0;
 
   return (
     <div className="card bg-neutral my-4">
@@ -23,7 +24,7 @@ function BusScheduleCard({ busSchedule }) {
           <thead className="text-center">
             <tr>
               <th>평일</th>
-              <th>주말</th>
+              {hasWeekendSchedule && <th>주말</th>}
             </tr>
           </thead>
           <tbody className="text-center">
@@ -32,9 +33,11 @@ function BusScheduleCard({ busSchedule }) {
                 <td className={!isWeekend && weekdayTime === nextTime ? "bg-base-200" : ""}>
                   {weekdayTime}
                 </td>
-                <td className={isWeekend && index < busSchedule.weekend.length && busSchedule.weekend[index] === nextTime ? "bg-base-200" : ""}>
-                  {index < busSchedule.weekend.length ? busSchedule.weekend[index] : ""}
-                </td>
+                {hasWeekendSchedule && (
+                  <td className={isWeekend && index < busSchedule.weekend.length && busSchedule.weekend[index] === nextTime ? "bg-base-200" : ""}>
+                    {index < busSchedule.weekend.length ? busSchedule.weekend[index] : ""}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

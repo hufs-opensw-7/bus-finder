@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../api/api.json";
 import redBusImage from "../../assets/red_bus.png";
+import blueBusImage from "../../assets/blue_bus.png";
 
 function BusCard() {
   const [timeToNextBuses, setTimeToNextBuses] = useState({});
@@ -84,7 +85,14 @@ function BusCard() {
         <Link to={`/detail/${busNumber}`} key={busNumber}>
           <div className="card card-side bg-base-100 shadow-xl my-4 hover:bg-base-200">
             <figure className="max-w-20 lg:max-w-24 ml-3.5 -mr-4">
-              <img src={redBusImage} alt="bus image" />
+              <img
+                src={
+                  busNumber.includes("교내셔틀버스")
+                    ? blueBusImage
+                    : redBusImage
+                }
+                alt="bus image"
+              />
             </figure>
 
             <div className="card-body">
