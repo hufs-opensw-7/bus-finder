@@ -42,6 +42,8 @@ function BusCard() {
 
           if (timeToNextBusInMinutes <= 2) {
             nextBuses[item.bus_number] = "곧 도착";
+          } else if (timeToNextBusInMinutes > 120) {
+            nextBuses[item.bus_number] = "운행종료";
           } else {
             nextBuses[item.bus_number] = timeToNextBusInMinutes;
           }
@@ -59,8 +61,8 @@ function BusCard() {
           const timeDifference = firstBusDateTime - now;
           const timeToNextBusInMinutes = Math.round(timeDifference / 60000); // Convert milliseconds to minutes
 
-          if (timeToNextBusInMinutes <= 2) {
-            nextBuses[item.bus_number] = "곧 도착";
+          if (timeToNextBusInMinutes > 120) {
+            nextBuses[item.bus_number] = "운행종료";
           } else {
             nextBuses[item.bus_number] = timeToNextBusInMinutes;
           }
@@ -93,17 +95,17 @@ function BusCard() {
               </p>
             </div>
 
-            <div className="content-center p-3 bg-neutral rounded-box text-green-400">
+            <div className={`content-center p-3 bg-neutral rounded-box ${timeToNextBuses[busNumber] === "운행종료" ? "text-red-400" : "text-green-400"}`}>
               <span
                 className={`font-mono ${
-                  timeToNextBuses[busNumber] === "곧 도착"
+                  timeToNextBuses[busNumber] === "곧 도착" || timeToNextBuses[busNumber] === "운행종료"
                     ? "text-base lg:text-xl"
                     : "text-xl lg:text-3xl"
                 }`}
               >
                 <span>{timeToNextBuses[busNumber]}</span>
               </span>
-              {timeToNextBuses[busNumber] !== "곧 도착" && (
+              {timeToNextBuses[busNumber] !== "곧 도착" && timeToNextBuses[busNumber] !== "운행종료" && (
                 <span className="text-sm lg:text-lg">분</span>
               )}
             </div>
