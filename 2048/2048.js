@@ -86,3 +86,117 @@ window.addEventListener('mouseup', function(이벤트) {
     }
     드래그시작 = false;
     드래그중 = false;
+
+    switch (방향) {
+        case '왼쪽':
+            var 새데이터 = [
+                [],
+                [],
+                [],
+                []
+            ];
+            데이터.forEach(function(열데이터, i) {
+                열데이터.forEach(function(행데이터, j) {
+                    if (행데이터) {
+                        if (새데이터[i][새데이터[i].length - 1] && 새데이터[i][새데이터[i].length - 1] === 행데이터) {
+                            새데이터[i][새데이터[i].length - 1] *= 2;
+                            var 현점수 = parseInt(점수표.textContent, 10);
+                            점수표.textContent = 현점수 + 새데이터[i][새데이터[i].length - 1];
+                        } else {
+                            새데이터[i].push(행데이터);
+                        }
+                    }
+                });
+            });
+            console.log(새데이터);
+            [1, 2, 3, 4].forEach(function(열데이터, i) {
+                [1, 2, 3, 4].forEach(function(행데이터, j) {
+                    데이터[i][j] = 새데이터[i][j] || 0;
+                });
+            });
+            break;
+        case '오른쪽':
+            var 새데이터 = [
+                [],
+                [],
+                [],
+                []
+            ];
+            데이터.forEach(function(열데이터, i) {
+                열데이터.forEach(function(행데이터, j) {
+                    if (행데이터) {
+                        if (새데이터[i][0] && 새데이터[i][0] === 행데이터) {
+                            새데이터[i][0] *= 2;
+                            var 현점수 = parseInt(점수표.textContent, 10);
+                            점수표.textContent = 현점수 + 새데이터[i][0];
+                        } else {
+                            새데이터[i].unshift(행데이터);
+                        }
+                    }
+                });
+            });
+            console.log(새데이터);
+            [1, 2, 3, 4].forEach(function(열데이터, i) {
+                [1, 2, 3, 4].forEach(function(행데이터, j) {
+                    데이터[i][3 - j] = 새데이터[i][j] || 0;
+                });
+            });
+            break;
+        case '위':
+            var 새데이터 = [
+                [],
+                [],
+                [],
+                []
+            ];
+            데이터.forEach(function(열데이터, i) {
+                열데이터.forEach(function(행데이터, j) {
+                    if (행데이터) {
+                        if (새데이터[j][새데이터[j].length - 1] && 새데이터[j][새데이터[j].length - 1] === 행데이터) {
+                            새데이터[j][새데이터[j].length - 1] *= 2;
+                            var 현점수 = parseInt(점수표.textContent, 10);
+                            점수표.textContent = 현점수 + 새데이터[j][새데이터[j].length - 1];
+                        } else {
+                            새데이터[j].push(행데이터);
+                        }
+                    }
+                });
+            });
+            console.log(새데이터);
+            [1, 2, 3, 4].forEach(function(행데이터, i) {
+                [1, 2, 3, 4].forEach(function(열데이터, j) {
+                    데이터[j][i] = 새데이터[i][j] || 0;
+                });
+            });
+            break;
+        case '아래':
+            var 새데이터 = [
+                [],
+                [],
+                [],
+                []
+            ];
+            데이터.forEach(function(열데이터, i) {
+                열데이터.forEach(function(행데이터, j) {
+                    if (행데이터) {
+                        if (새데이터[j][0] && 새데이터[j][0] === 행데이터) {
+                            새데이터[j][0] *= 2;
+                            var 현점수 = parseInt(점수표.textContent, 10);
+                            점수표.textContent = 현점수 + 새데이터[j][0];
+                        } else {
+                            새데이터[j].unshift(행데이터);
+                        }
+                    }
+                });
+            });
+            console.log(새데이터);
+            [1, 2, 3, 4].forEach(function(행데이터, i) {
+                [1, 2, 3, 4].forEach(function(열데이터, j) {
+                    데이터[3 - j][i] = 새데이터[i][j] || 0;
+                });
+            });
+            break;
+    }
+    그리기();
+    랜덤생성();
+});
