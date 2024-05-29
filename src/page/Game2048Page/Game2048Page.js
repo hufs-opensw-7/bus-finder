@@ -19,6 +19,7 @@ const Game2048Page = () => {
     addRandomTile(newBoard);
     addRandomTile(newBoard);
     setBoard(newBoard);
+    setScore(0);//새로운 게임 시 점수 리셋
   };
 
   const handleKeyDown = (event) => {
