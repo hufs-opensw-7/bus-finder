@@ -68,6 +68,11 @@ const addRandomTile = (board) => {
     }
   }
   if (emptyTiles.length === 0) return;
+  for (let r = 0; r < board.length; r++) {
+    for (let c = 0; c < board[r].length; c++) {
+        if (board[r][c] === 2048) return;
+    }
+  }
   let { r, c } = emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
   board[r][c] = Math.random() < 0.9 ? 2 : 4;
 };
