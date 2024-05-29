@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Board from '../../components/Game2048Page/Board';
-import './Game2048Page.css';
+import React, { useState, useEffect, useRef } from "react";
+import Board from "../../components/Game2048Page/Board";
+import "./Game2048Page.css";
 
 const SIZE = 4;
 
@@ -19,14 +19,14 @@ const Game2048Page = () => {
     addRandomTile(newBoard);
     addRandomTile(newBoard);
     setBoard(newBoard);
-    setScore(0);//새로운 게임 시 점수 리셋
+    setScore(0); //새로운 게임 시 점수 리셋
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === 'ArrowUp') handleMove('up');
-    if (event.key === 'ArrowDown') handleMove('down');
-    if (event.key === 'ArrowLeft') handleMove('left');
-    if (event.key === 'ArrowRight') handleMove('right');
+    if (event.key === "ArrowUp") handleMove("up");
+    if (event.key === "ArrowDown") handleMove("down");
+    if (event.key === "ArrowLeft") handleMove("left");
+    if (event.key === "ArrowRight") handleMove("right");
   };
 
   const handleMove = (direction) => {
@@ -40,15 +40,17 @@ const Game2048Page = () => {
   };
 
   return (
-    <div 
-      className="game-container" 
-      tabIndex="0" 
-      onKeyDown={handleKeyDown} 
+    <div
+      className="game-container"
+      tabIndex="0"
+      onKeyDown={handleKeyDown}
       ref={gameContainerRef}
     >
       <div className="score">Score: {score}</div>
       <Board board={board} />
-      <button className="new-game-button" onClick={initializeBoard}>New Game</button>
+      <button className="new-game-button" onClick={initializeBoard}>
+        New Game
+      </button>
     </div>
   );
 };
@@ -117,23 +119,23 @@ const moveBoard = (board, direction) => {
     return result;
   };
 
-  if (direction === 'left') {
+  if (direction === "left") {
     for (let r = 0; r < SIZE; r++) {
       movedBoard[r] = moveRowLeft(movedBoard[r]);
     }
-  } else if (direction === 'right') {
+  } else if (direction === "right") {
     movedBoard = rotateRight(movedBoard);
     for (let r = 0; r < SIZE; r++) {
       movedBoard[r] = moveRowLeft(movedBoard[r]);
     }
     movedBoard = rotateLeft(movedBoard);
-  } else if (direction === 'up') {
+  } else if (direction === "up") {
     movedBoard = rotateLeft(movedBoard);
     for (let r = 0; r < SIZE; r++) {
       movedBoard[r] = moveRowLeft(movedBoard[r]);
     }
     movedBoard = rotateRight(movedBoard);
-  } else if (direction === 'down') {
+  } else if (direction === "down") {
     movedBoard = rotateRight(movedBoard);
     movedBoard = rotateRight(movedBoard);
     for (let r = 0; r < SIZE; r++) {

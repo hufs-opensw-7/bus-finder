@@ -23,6 +23,50 @@
   color: #776e65;
 }
 
+.tile-8 {
+  background-color: #F3B27A;
+  color: #F9F6F2;
+}
+
+.tile-16 {
+  background-color: #F69664;
+  color: #F9F6F2;
+}
+
+.tile-32 {
+  background-color: #F77C5F;
+  color: #F9F6F2;
+}
+
+.tile-64 {
+  background-color: #F75F3B;
+  color: #F9F6F2;
+}
+
+.tile-128 {
+  background-color: #EDD073;
+  color: #F9F6F2;
+}
+
+.tile-256 {
+  background-color: #EDCC62;
+  color: #F9F6F2;
+}
+
+.tile-512 {
+  background-color: #EDC950;
+  color: #F9F6F2;
+}
+
+.tile-1024 {
+  background-color: #EDC53F;
+  color: #F9F6F2;
+}
+
+.tile-2048 {
+  background-color: #EDC22E;
+  color: #F9F6F2;
+}
 /* Add more tile styles as needed */
 
 @media (max-width: 600px) {
