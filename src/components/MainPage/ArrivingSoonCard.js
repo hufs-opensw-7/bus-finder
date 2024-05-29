@@ -37,7 +37,7 @@ function ArrivingSoon() {
     const busTimestamp = busHour * 60 + busMinute;
     const currentTimestamp = currentHour * 60 + currentMinute;
     return (
-      busTimestamp - currentTimestamp <= 2 &&
+      busTimestamp - currentTimestamp <= 5 &&
       busTimestamp - currentTimestamp >= 0
     );
   };
