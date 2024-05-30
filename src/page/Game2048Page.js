@@ -158,7 +158,7 @@ const Game2048 = () => {
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [board, gameOver]);
+  }, [board, gameOver, handleKeyDown]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen" onTouchStart={handleTouchStart}>
