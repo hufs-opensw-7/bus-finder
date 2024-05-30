@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import './Game2048Page.css';
 
 const SIZE = 4;
 const INITIAL_TILES = 2;
@@ -72,25 +71,16 @@ const move = (board, direction, setScore) => {
   return newBoard;
 };
 
-const Board = ({ board }) => (
-  <div className="board">
-    {board.map((row, rowIndex) => (
-      <div key={rowIndex} className="row">
-        {row.map((tile, colIndex) => (
-          <div key={colIndex} className={`tile ${tile ? `tile-${tile}` : ''}`}>
-            {tile}
-          </div>
-        ))}
-      </div>
-    ))}
+const Tile = ({ value }) => (
+  <div className={`tile w-16 h-16 flex justify-center items-center bg-gray-200 text-gray-700 font-bold text-lg rounded-lg shadow-md`}>
+    {value}
   </div>
 );
 
-const Game2048Page = () => {
-  const [board, setBoard] = useState(initializeBoard);
+const Game2048 = () => {
+  const [board, setBoard] = useState(initializeBoard());
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const [touchStart, setTouchStart] = useState({ x: 0, y: 0 });
 
   const handleKeyDown = (e) => {
     if (gameOver) return;
@@ -119,26 +109,37 @@ const Game2048Page = () => {
   };
 
   const handleTouchStart = (e) => {
-    const touch = e.touches[0];
-    setTouchStart({ x: touch.clientX, y: touch.clientY });
-  };
+    const touchStartX = e.touches[0].clientX;
+    const touchStartY = e.touches[0].clientY;
+    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchend', handleTouchEnd);
 
-  const handleTouchEnd = (e) => {
-    const touch = e.changedTouches[0];
-    const dx = touch.clientX - touchStart.x;
-    const dy = touch.clientY - touchStart.y;
+    function handleTouchMove(e) {
+      e.preventDefault();
+    }
 
-    if (Math.abs(dx) > Math.abs(dy)) {
-      if (dx > 0) {
-        handleKeyDown({ key: 'ArrowRight' });
+    function handleTouchEnd(e) {
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+
+      const dx = touchEndX - touchStartX;
+      const dy = touchEndY - touchStartY;
+
+      if (Math.abs(dx) > Math.abs(dy)) {
+        if (dx > 0) {
+          handleKeyDown({ key: 'ArrowRight' });
+        } else {
+          handleKeyDown({ key: 'ArrowLeft' });
+        }
       } else {
-        handleKeyDown({ key: 'ArrowLeft' });
-      }
-    } else {
-      if (dy > 0) {
-        handleKeyDown({ key: 'ArrowDown' });
-      } else {
-        handleKeyDown({ key: 'ArrowUp' });
+        if (dy > 0) {
+          handleKeyDown({ key: 'ArrowDown' });
+        } else {
+          handleKeyDown({ key: 'ArrowUp' });
+        }
       }
     }
   };
@@ -156,29 +157,23 @@ const Game2048Page = () => {
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchend', handleTouchEnd);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchend', handleTouchEnd);
-    };
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [board, gameOver]);
 
   return (
-    <div className="container-2048">
-      <div className="game">
-        <div className="score">Score: {score}</div>
-        {gameOver && <div className="game-over">Game Over!</div>}
-        <Board board={board} />
-        <button onClick={() => {
-          setBoard(initializeBoard());
-          setScore(0);
-          setGameOver(false);
-        }}>Restart</button>
+    <div className="flex flex-col items-center justify-center h-screen" onTouchStart={handleTouchStart}>
+      <div className="mb-4 text-3xl font-bold">2048</div>
+      <div className="grid grid-cols-4 gap-4">
+        {board.map((row, rowIndex) => (
+          row.map((tile, colIndex) => (
+            <Tile key={`${rowIndex}-${colIndex}`} value={tile} />
+          ))
+        ))}
       </div>
+      <div className="mt-4 text-lg font-bold">Score: {score}</div>
+      {gameOver && <div className="mt-4 text-xl font-bold text-red-600">Game Over!</div>}
     </div>
   );
 };
 
-export default Game2048Page;
+export default Game2048;
