@@ -52,7 +52,7 @@ function BusInformationCard({ busNumber, headingTo, schedule }) {
   return (
     <div className="card bg-neutral my-4">
       <div className="card-body items-center text-center">
-        <img src={busImage} alt="bus image" className="w-24" />
+        <img src={busImage} className="w-24" />
         <h1 className="text-base lg:text-lg font-bold">{busNumber}</h1>
         <p className="text-sm lg:text-base">{headingText}</p>
         <p className={`${timeTextColor} text-xs lg:text-sm`}>{timeToNextBus}</p>
