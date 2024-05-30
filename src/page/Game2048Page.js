@@ -90,13 +90,13 @@ const Game2048 = () => {
         newBoard = move(board, 0, setScore);
         break;
       case 'ArrowUp':
-        newBoard = move(board, 1, setScore);
+        newBoard = move(board, 3, setScore);
         break;
       case 'ArrowRight':
         newBoard = move(board, 2, setScore);
         break;
       case 'ArrowDown':
-        newBoard = move(board, 3, setScore);
+        newBoard = move(board, 1, setScore);
         break;
       default:
         return;
