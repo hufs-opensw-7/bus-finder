@@ -1,13 +1,13 @@
-import { BrowserRouter } from 'react-router-dom';
-import Container from './Container';
+import { BrowserRouter } from "react-router-dom";
+import Container from "./Container";
 
-import Header from './components/Header';
-import Footer from './components/Footer'
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="lg:container lg:mx-auto">
+      <div className="lg:container lg:mx-auto h-[100vh] flex flex-col justify-between">
         <Header />
         <Container />
         <Footer />
