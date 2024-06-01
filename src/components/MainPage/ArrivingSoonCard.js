@@ -16,20 +16,6 @@ function ArrivingSoon() {
   // 현재 시간
   const currentTime = getCurrentTime();
 
-  // 버스 도착 예정 시간을 파싱하여 현재 시간과 비교하고, 2분 이내에 도착하는 버스 번호들을 가져오는 함수
-  const getClosestBuses = () => {
-    const closestBuses = [];
-    api.forEach((bus) => {
-      const schedules = isWeekend ? bus.schedule.weekend : bus.schedule.weekday;
-      schedules.forEach((time) => {
-        if (isClose(time, currentTime)) {
-          closestBuses.push(bus.bus_number);
-        }
-      });
-    });
-    return closestBuses;
-  };
-
   // 현재 시간과 버스 도착 시간을 비교하여 2분 이내에 도착하는지 확인하는 함수
   const isClose = (busTime, currentTime) => {
     const [busHour, busMinute] = busTime.split(":").map(Number);
@@ -40,6 +26,38 @@ function ArrivingSoon() {
       busTimestamp - currentTimestamp <= 5 &&
       busTimestamp - currentTimestamp >= 0
     );
+  };
+
+  // 버스 도착 예정 시간을 파싱하여 현재 시간과 비교하고, 2분 이내에 도착하는 버스 번호들을 가져오는 함수
+  const getClosestBuses = () => {
+    const closestBuses = [];
+
+    if (!Array.isArray(api)) {
+      console.error("API data is not an array:", api);
+      return closestBuses;
+    }
+
+    api.forEach((bus) => {
+      if (!bus.schedule) {
+        console.error("Bus schedule is undefined:", bus);
+        return;
+      }
+
+      const schedules = isWeekend ? bus.schedule.weekend : bus.schedule.weekday;
+
+      if (!Array.isArray(schedules)) {
+        console.error("Schedules is not an array:", schedules);
+        return;
+      }
+
+      schedules.forEach((time) => {
+        if (isClose(time, currentTime)) {
+          closestBuses.push(bus.bus_number);
+        }
+      });
+    });
+
+    return closestBuses;
   };
 
   // 가장 가까운 시간에 도착하는 버스 번호들

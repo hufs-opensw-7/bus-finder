@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter>
       <div className="lg:container lg:mx-auto h-[100vh] flex flex-col justify-between">
         <Header />
         <Container />

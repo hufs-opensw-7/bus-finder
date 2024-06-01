@@ -15,16 +15,23 @@ function BusCard() {
   useEffect(() => {
     const findTimeToNextBuses = () => {
       const now = new Date();
-      const nowTime = `${now.getHours() < 10 ? "0" : ""}${now.getHours()}:${
-        now.getMinutes() < 10 ? "0" : ""
-      }${now.getMinutes()}`;
+      const nowTime = `${now.getHours() < 10 ? "0" : ""}${now.getHours()}:${now.getMinutes() < 10 ? "0" : ""}${now.getMinutes()}`;
       const weekend = isWeekend();
       const nextBuses = {};
 
       api.forEach((item) => {
-        const schedule = weekend
-          ? item.schedule.weekend
-          : item.schedule.weekday;
+        if (!item.schedule) {
+          console.error(`No schedule found for bus number ${item.bus_number}`);
+          return;
+        }
+
+        const schedule = weekend ? item.schedule.weekend : item.schedule.weekday;
+
+        if (!Array.isArray(schedule)) {
+          console.error(`Schedule is not an array for bus number ${item.bus_number}`, schedule);
+          return;
+        }
+
         const currentTimeIndex = schedule.findIndex((time) => time >= nowTime);
 
         if (currentTimeIndex !== -1) {
@@ -50,6 +57,11 @@ function BusCard() {
           }
         } else {
           const firstBusTomorrow = schedule[0];
+          if (!firstBusTomorrow) {
+            console.error(`No first bus found for bus number ${item.bus_number}`);
+            nextBuses[item.bus_number] = "운행종료";
+            return;
+          }
           const firstBusHour = parseInt(firstBusTomorrow.split(":")[0]);
           const firstBusMinute = parseInt(firstBusTomorrow.split(":")[1]);
           const firstBusDateTime = new Date(
