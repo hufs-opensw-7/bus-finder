@@ -15,7 +15,9 @@ function BusCard() {
   useEffect(() => {
     const findTimeToNextBuses = () => {
       const now = new Date();
-      const nowTime = `${now.getHours() < 10 ? "0" : ""}${now.getHours()}:${now.getMinutes() < 10 ? "0" : ""}${now.getMinutes()}`;
+      const nowTime = `${now.getHours() < 10 ? "0" : ""}${now.getHours()}:${
+        now.getMinutes() < 10 ? "0" : ""
+      }${now.getMinutes()}`;
       const weekend = isWeekend();
       const nextBuses = {};
 
@@ -25,10 +27,15 @@ function BusCard() {
           return;
         }
 
-        const schedule = weekend ? item.schedule.weekend : item.schedule.weekday;
+        const schedule = weekend
+          ? item.schedule.weekend
+          : item.schedule.weekday;
 
         if (!Array.isArray(schedule)) {
-          console.error(`Schedule is not an array for bus number ${item.bus_number}`, schedule);
+          console.error(
+            `Schedule is not an array for bus number ${item.bus_number}`,
+            schedule
+          );
           return;
         }
 
@@ -58,7 +65,9 @@ function BusCard() {
         } else {
           const firstBusTomorrow = schedule[0];
           if (!firstBusTomorrow) {
-            console.error(`No first bus found for bus number ${item.bus_number}`);
+            console.error(
+              `No first bus found for bus number ${item.bus_number}`
+            );
             nextBuses[item.bus_number] = "운행종료";
             return;
           }
@@ -115,19 +124,27 @@ function BusCard() {
               </p>
             </div>
 
-            <div className={`content-center p-3 bg-neutral rounded-box ${timeToNextBuses[busNumber] === "운행종료" ? "text-red-400" : "text-green-400"}`}>
-              <span
-                className={`font-mono ${
-                  timeToNextBuses[busNumber] === "곧 도착" || timeToNextBuses[busNumber] === "운행종료"
+            <div
+              className={`flex items-center justify-center p-3 bg-neutral rounded-box ${
+                timeToNextBuses[busNumber] === "운행종료"
+                  ? "text-red-400"
+                  : "text-green-400"
+              } w-14 sm:w-16 lg:w-20 text-center`}
+            >
+              <div
+                className={`font-mono whitespace-nowrap ${
+                  timeToNextBuses[busNumber] === "곧 도착" ||
+                  timeToNextBuses[busNumber] === "운행종료"
                     ? "text-base lg:text-xl"
                     : "text-xl lg:text-3xl"
                 }`}
               >
                 <span>{timeToNextBuses[busNumber]}</span>
-              </span>
-              {timeToNextBuses[busNumber] !== "곧 도착" && timeToNextBuses[busNumber] !== "운행종료" && (
-                <span className="text-sm lg:text-lg">분</span>
-              )}
+              </div>
+              {timeToNextBuses[busNumber] !== "곧 도착" &&
+                timeToNextBuses[busNumber] !== "운행종료" && (
+                  <span className="text-sm lg:text-lg">분</span>
+                )}
             </div>
           </div>
         </Link>

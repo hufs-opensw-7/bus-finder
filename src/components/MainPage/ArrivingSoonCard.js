@@ -16,7 +16,7 @@ function ArrivingSoon() {
   // 현재 시간
   const currentTime = getCurrentTime();
 
-  // 현재 시간과 버스 도착 시간을 비교하여 2분 이내에 도착하는지 확인하는 함수
+  // 현재 시간과 버스 도착 시간을 비교하여 5분 이내에 도착하는지 확인하는 함수
   const isClose = (busTime, currentTime) => {
     const [busHour, busMinute] = busTime.split(":").map(Number);
     const [currentHour, currentMinute] = currentTime.split(":").map(Number);
