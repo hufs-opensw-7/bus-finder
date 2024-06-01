@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/bus-finder/static/css/main.2442df4a.css",
-    "main.js": "/bus-finder/static/js/main.dc571e4b.js",
+    "main.css": "/bus-finder/static/css/main.0f372091.css",
+    "main.js": "/bus-finder/static/js/main.dcf017ef.js",
     "static/media/red_bus.png": "/bus-finder/static/media/red_bus.f5bbd0c7ce9a72a22152.png",
     "static/media/blue_bus.png": "/bus-finder/static/media/blue_bus.66408e0aeb775e866697.png",
     "static/media/playing_game.png": "/bus-finder/static/media/playing_game.2a0ab162f7d59f4ffb5d.png",
@@ -254,11 +254,11 @@
     "static/media/noto-sans-kr-vietnamese-400-normal.woff2": "/bus-finder/static/media/noto-sans-kr-vietnamese-400-normal.b3076f48c06a0a59481a.woff2",
     "static/media/noto-sans-kr-latin-ext-400-normal.woff2": "/bus-finder/static/media/noto-sans-kr-latin-ext-400-normal.1fc444bff94456e8ed53.woff2",
     "index.html": "/bus-finder/index.html",
-    "main.2442df4a.css.map": "/bus-finder/static/css/main.2442df4a.css.map",
-    "main.dc571e4b.js.map": "/bus-finder/static/js/main.dc571e4b.js.map"
+    "main.0f372091.css.map": "/bus-finder/static/css/main.0f372091.css.map",
+    "main.dcf017ef.js.map": "/bus-finder/static/js/main.dcf017ef.js.map"
   },
   "entrypoints": [
-    "static/css/main.2442df4a.css",
-    "static/js/main.dc571e4b.js"
+    "static/css/main.0f372091.css",
+    "static/js/main.dcf017ef.js"
   ]
 }
