@@ -1,6 +1,6 @@
-import ArrivingSoon from '../components/MainPage/ArrivingSoonCard';
-import BusCard from '../components/MainPage/BusCard';
-import GameCard from '../components/MainPage/GameCard';
+import ArrivingSoon from "../components/MainPage/ArrivingSoonCard";
+import BusCard from "../components/MainPage/BusCard";
+import GameCard from "../components/MainPage/GameCard";
 
 function MainPage() {
   return (
